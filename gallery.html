@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A photo journal by Zijie Xu. Photographs from Japan, New York, and Chicago, plus a map of my travels across the United States and East Asia.">
+<meta name="theme-color" content="#080e1b">
+<title>Photo journal — Zijie Xu</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="gallery.css">
+<script src="script.js" defer>
+</script>
+<script src="gallery-map.js" defer>
+</script>
+</head>
+<body class="gallery-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap">
+<a class="wordmark" href="index.html" aria-label="Zijie Xu home">zx<span>✳</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="index.html#experience">Experience</a>
+<a href="index.html#about-me">About</a>
+<a href="gallery.html" aria-current="page">Photography</a>
+<a class="nav-contact" href="mailto:xuzijie@umich.edu">Let’s talk ↗</a>
+</nav>
+</header>
+<main id="main" class="wrap">
+<section class="gallery-hero">
+<p class="eyebrow">A PHOTO JOURNAL / FUJIFILM X-T30</p>
+<h1>Taking the <span class="serif accent">scenic route.</span>
+</h1>
+<p>Away from the code, behind the camera. A collection of places, passing moments, and things that made me look twice.</p>
+</section>
+<section class="travel-section" aria-labelledby="travel-title">
+<div class="travel-heading">
+<div>
+<p class="eyebrow">PLACES I’VE BEEN</p>
+<h2 id="travel-title">A few pins on the map.</h2>
+</div>
+<p>11 cities <span aria-hidden="true">·</span> 4 countries</p>
+</div>
+<div class="travel-map-panel">
+<div class="map-toolbar" role="group" aria-label="Map view">
+<button type="button" data-map-view="world" aria-pressed="true">World</button>
+<button type="button" data-map-view="america" aria-pressed="false">North America</button>
+<button type="button" data-map-view="asia" aria-pressed="false">East Asia</button>
+</div>
+<svg id="travel-map" viewBox="0 0 1000 500" role="group" aria-labelledby="map-title map-description">
+<title id="map-title">Places visited by Zijie Xu</title>
+<desc id="map-description">Select a city marker or a city in the list below. Regional views bring nearby cities closer.</desc>
+<defs>
+<pattern id="map-grid" width="83.333" height="83.333" patternUnits="userSpaceOnUse">
+<path d="M83.333 0H0V83.333" fill="none" stroke="#91bbff" stroke-opacity=".08" stroke-width=".5"/>
+</pattern>
+</defs>
+<rect width="1000" height="500" fill="#0b1628"/>
+<rect width="1000" height="500" fill="url(#map-grid)"/>
+<image href="assets/world-land.svg" width="1000" height="500"/>
+<g id="map-markers">
+</g>
+</svg>
+<div class="map-detail" aria-live="polite" aria-atomic="true">
+<div>
+<strong id="map-city-name">Across the Pacific and back.</strong>
+<p id="map-city-country">Select a city to explore.</p>
+</div>
+<a id="map-collection" hidden>View photographs <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+<div class="city-list" role="group" aria-label="Visited cities">
+<button type="button" class="city-button" data-city="Chicago" data-country="United States" data-lat="41.8781" data-lon="-87.6298" data-collection="chicago" aria-pressed="false">Chicago</button>
+<button type="button" class="city-button" data-city="New York" data-country="United States" data-lat="40.7128" data-lon="-74.006" data-collection="new-york" aria-pressed="false">New York</button>
+<button type="button" class="city-button" data-city="Los Angeles" data-country="United States" data-lat="34.0522" data-lon="-118.2437" data-collection="" aria-pressed="false">Los Angeles</button>
+<button type="button" class="city-button" data-city="Ann Arbor" data-country="United States" data-lat="42.2808" data-lon="-83.743" data-collection="" aria-pressed="false">Ann Arbor</button>
+<button type="button" class="city-button" data-city="East Lansing" data-country="United States" data-lat="42.7369" data-lon="-84.4839" data-collection="" aria-pressed="false">East Lansing</button>
+<button type="button" class="city-button" data-city="Kyoto" data-country="Japan" data-lat="35.0116" data-lon="135.7681" data-collection="japan" aria-pressed="false">Kyoto</button>
+<button type="button" class="city-button" data-city="Tokyo" data-country="Japan" data-lat="35.6762" data-lon="139.6503" data-collection="japan" aria-pressed="false">Tokyo</button>
+<button type="button" class="city-button" data-city="Osaka" data-country="Japan" data-lat="34.6937" data-lon="135.5023" data-collection="japan" aria-pressed="false">Osaka</button>
+<button type="button" class="city-button" data-city="Seoul" data-country="South Korea" data-lat="37.5665" data-lon="126.978" data-collection="" aria-pressed="false">Seoul</button>
+<button type="button" class="city-button" data-city="Shanghai" data-country="China" data-lat="31.2304" data-lon="121.4737" data-collection="" aria-pressed="false">Shanghai</button>
+<button type="button" class="city-button" data-city="Wuhan" data-country="China" data-lat="30.5928" data-lon="114.3055" data-collection="" aria-pressed="false">Wuhan</button>
+</div>
+<p class="map-credit">Map outlines: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>. City markers show approximate locations.</p>
+<noscript>
+<p>The cities above are my travel stops. Enable JavaScript to explore their map locations.</p>
+</noscript>
+</section>
+<nav class="gallery-nav" aria-label="Photo collections">
+<a href="#japan">Japan, 2025 ↓</a>
+<a href="#new-york">New York, 2024 ↓</a>
+<a href="#chicago">Chicago, 2024 ↓</a>
+</nav>
+<section id="japan" class="gallery-section">
+<header>
+<h2>Japan<span class="accent">.</span>
+</h2>
+<p>August 2025 / 06 PHOTOGRAPHS</p>
+</header>
+<div class="gallery-grid">
+<button class="photo-button" type="button" aria-label="Enlarge: Japan, August 2025 — photograph 1">
+<img src="assets/photos/IMG_8963.jpeg" alt="Japan, August 2025 — photograph 1" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: An orange cat looking toward the light in Japan">
+<img src="assets/photos/IMG_8978.jpeg" alt="An orange cat looking toward the light in Japan" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Japan, August 2025 — photograph 3">
+<img src="assets/photos/IMG_8977.jpeg" alt="Japan, August 2025 — photograph 3" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Japan, August 2025 — photograph 4">
+<img src="assets/photos/IMG_8979.jpeg" alt="Japan, August 2025 — photograph 4" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Japan, August 2025 — photograph 5">
+<img src="assets/photos/IMG_8980.jpeg" alt="Japan, August 2025 — photograph 5" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Japan, August 2025 — photograph 6">
+<img src="assets/photos/IMG_8968.jpeg" alt="Japan, August 2025 — photograph 6" loading="lazy" decoding="async">
+</button>
+</div>
+</section>
+<section id="new-york" class="gallery-section">
+<header>
+<h2>New York<span class="accent">.</span>
+</h2>
+<p>August 2024 / 05 PHOTOGRAPHS</p>
+</header>
+<div class="gallery-grid">
+<button class="photo-button" type="button" aria-label="Enlarge: New York, August 2024 — photograph 1">
+<img src="assets/photos/DSCF8520.jpeg" alt="New York, August 2024 — photograph 1" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: New York, August 2024 — photograph 2">
+<img src="assets/photos/IMG_0016.jpeg" alt="New York, August 2024 — photograph 2" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: New York, August 2024 — photograph 3">
+<img src="assets/photos/IMG_0020.jpeg" alt="New York, August 2024 — photograph 3" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: New York, August 2024 — photograph 4">
+<img src="assets/photos/IMG_0021.jpeg" alt="New York, August 2024 — photograph 4" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: New York, August 2024 — photograph 5">
+<img src="assets/photos/IMG_3901.jpeg" alt="New York, August 2024 — photograph 5" loading="lazy" decoding="async">
+</button>
+</div>
+</section>
+<section id="chicago" class="gallery-section">
+<header>
+<h2>Chicago<span class="accent">.</span>
+</h2>
+<p>August 2024 / 05 PHOTOGRAPHS</p>
+</header>
+<div class="gallery-grid">
+<button class="photo-button" type="button" aria-label="Enlarge: Navy Pier Ferris wheel at dusk in Chicago">
+<img src="assets/photos/IMG_3541.jpeg" alt="Navy Pier Ferris wheel at dusk in Chicago" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Chicago, August 2024 — photograph 2">
+<img src="assets/photos/IMG_3543.jpeg" alt="Chicago, August 2024 — photograph 2" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Chicago, August 2024 — photograph 3">
+<img src="assets/photos/IMG_3606.jpeg" alt="Chicago, August 2024 — photograph 3" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Chicago, August 2024 — photograph 4">
+<img src="assets/photos/IMG_3712.jpeg" alt="Chicago, August 2024 — photograph 4" loading="lazy" decoding="async">
+</button>
+<button class="photo-button" type="button" aria-label="Enlarge: Chicago, August 2024 — photograph 5">
+<img src="assets/photos/IMG_3741.jpeg" alt="Chicago, August 2024 — photograph 5" loading="lazy" decoding="async">
+</button>
+</div>
+</section>
+<section class="contact">
+<p class="eyebrow">THERE’S MORE ON THE OTHER SIDE OF THE LENS.</p>
+<a class="contact-title" href="index.html">Back to <span class="serif">building things.</span> ↗</a>
+</section>
+</main>
+<dialog id="lightbox" class="lightbox" aria-label="Photograph viewer" aria-describedby="lightbox-caption">
+<button type="button" class="lightbox-close" aria-label="Close photograph" autofocus>×</button>
+<img alt="">
+<div class="lightbox-bar">
+<button type="button" data-prev aria-label="Previous photograph">←</button>
+<p id="lightbox-caption" aria-live="polite">
+</p>
+<button type="button" data-next aria-label="Next photograph">→</button>
+</div>
+</dialog>
+<footer class="wrap footer">
+<span>© <span data-year>2026</span> Zijie Xu</span>
+<span>A little code. A lot of curiosity.</span>
+<a href="#main">Back to top ↑</a>
+</footer>
+</body>
+</html>

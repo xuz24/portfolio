@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="I'm Zijie Xu, a Computer Science and Data Science student at the University of Michigan exploring machine learning, building things, and taking photos.">
+  <meta name="theme-color" content="#080e1b">
+  <meta property="og:title" content="Zijie Xu">
+  <meta property="og:description" content="Data science, machine learning, and a little curiosity.">
+  <title>Zijie Xu</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="motion.js" defer></script>
+</head>
+<body>
+  <div class="sand-background" aria-hidden="true"><canvas id="sand"></canvas></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
+    <section id="about" class="intro" aria-labelledby="intro-title">
+      <div class="intro-content">
+        <h1 id="intro-title">Hi, I’m <strong>Zijie.</strong><br>I’m a <span class="role-word" data-role aria-live="polite"></span><span class="typing-caret" aria-hidden="true"></span></h1>
+        <nav class="intro-links" aria-label="My links">
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="assets/resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+          <a href="https://github.com/xuz24" target="_blank" rel="noopener">Git ↗</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <a class="scroll-cue" href="#about-me" aria-label="Scroll to About me"><span>About me</span><span aria-hidden="true">↓</span></a>
+    </section>
+    <section id="about-me" class="bio-section" aria-labelledby="bio-title">
+      <div class="bio-content">
+        <p class="project-index">A little about me</p>
+        <h2 id="bio-title">Learning by building.</h2>
+        <p>I’m majoring in Computer Science and Data Science at the University of Michigan, with interests in AI, machine learning, and data engineering. I enjoy experimenting with models, building data pipelines, and turning ideas into useful tools.</p>
+        <p>Outside of research and programming, I enjoy photography and badminton, learning guitar, and probably a little too much milk tea.</p>
+        <a class="project-link" href="gallery.html">My photography <span aria-hidden="true">↗</span></a>
+      </div>
+      <img class="bio-photo" src="assets/profile.jpg" width="900" height="848" alt="Portrait of Zijie Xu" loading="lazy" decoding="async">
+    </section>
+    <section id="work" aria-label="Experience and projects">
+      <section id="experience" class="work-experience" aria-labelledby="experience-title">
+        <article class="experience-entry experience-with-image experience-entry-first">
+          <header class="section-heading">
+            <p class="project-index">Experience</p>
+            <h2 id="experience-title">Experience &amp; research</h2>
+          </header>
+          <div class="experience-content">
+            <p class="project-index">01 / 05 <span>Experience</span></p>
+            <h3>GEMS Lab</h3>
+            <p class="experience-role">Research Intern</p>
+          <div class="experience-meta">
+            <p><time datetime="2026-03">March 2026</time> — Present</p>
+            <p>Ann Arbor, MI</p>
+          </div>
+            <ul>
+              <li>Reimplemented MD-Syn in PyTorch without published code to reproduce baseline results for drug–drug synergy prediction, achieving <strong>0.91 AUROC</strong> on DrugCombDB.</li>
+              <li>Conducted ablation studies across 1D and 2D feature extraction modules, finding that 1D features accounted for approximately <strong>99% of AUROC performance</strong>, while adding 2D features improved recall by <strong>2.4 points</strong>.</li>
+              <li>Implemented Tucker decomposition to generate drug–protein graph embeddings, improving AUROC by <strong>0.02–0.07</strong> over the identity-only baseline on in- and out-of-distribution drug splits.</li>
+            </ul>
+          </div>
+          <a class="experience-visual" href="assets/graph_overview.png" target="_blank" rel="noopener" aria-label="View full-size image: DrugComb drug–protein graph and connection statistics">
+            <img src="assets/graph_overview.png" width="3060" height="1800" alt="DrugComb drug–protein graph and connection statistics" loading="lazy" decoding="async">
+          </a>
+        </article>
+
+        <article class="experience-entry experience-with-image">
+          <div class="experience-content">
+            <p class="project-index">02 / 05 <span>Experience</span></p>
+            <h3>Michigan Institute for Data and AI in Society</h3>
+            <p class="experience-role">Software Developer</p>
+          <div class="experience-meta">
+            <p><time datetime="2026-08">Aug. 2026</time> — Present</p>
+            <p>Ann Arbor, MI</p>
+          </div>
+            <ul>
+              <li>Updated a federal grant tracker used by <strong>675+ affiliate faculty members</strong>, adding <strong>1,100+ opportunities</strong> and improving pipelines that process data from Grants.gov, SAM.gov, and the Federal Register.</li>
+            </ul>
+          </div>
+          <a class="experience-visual" href="assets/grant_tracker.png" target="_blank" rel="noopener" aria-label="View full-size image: MIDAS AI and Data Science Funding Digest grant tracker">
+            <img src="assets/grant_tracker.png" width="2516" height="1514" alt="MIDAS AI and Data Science Funding Digest grant tracker" loading="lazy" decoding="async">
+          </a>
+        </article>
+
+        <article class="experience-entry experience-with-image">
+          <div class="experience-content">
+            <p class="project-index">03 / 05 <span>Experience</span></p>
+            <h3>Innovation for Impact</h3>
+            <p class="experience-role">Software Developer</p>
+          <div class="experience-meta">
+            <p><time datetime="2026-01">Jan. 2026</time> — Present</p>
+            <p>Ann Arbor, MI</p>
+          </div>
+            <ul>
+              <li>Built a chemotherapy dose scheduling web app for Michigan Medicine using <strong>Flask and a SQLite + JSON database</strong>, collaborating with a cross-functional team to replace pen-and-paper workflows and improve efficiency.</li>
+            </ul>
+          </div>
+          <a class="experience-visual" href="assets/mich_med.png" target="_blank" rel="noopener" aria-label="View full-size image: Michigan Medicine chemotherapy dose scheduling application">
+            <img src="assets/mich_med.png" width="1884" height="1414" alt="Michigan Medicine chemotherapy dose scheduling application" loading="lazy" decoding="async">
+          </a>
+        </article>
+
+        <article class="experience-entry experience-with-image">
+          <div class="experience-content">
+            <p class="project-index">04 / 05 <span>Experience</span></p>
+            <h3>ARTIST Group</h3>
+            <p class="experience-role">Research Assistant</p>
+          <div class="experience-meta">
+            <p><time datetime="2025-05">May 2025</time> — <time datetime="2025-12">Dec. 2025</time></p>
+            <p>Ann Arbor, MI</p>
+          </div>
+            <ul>
+              <li>Reduced manual data processing time by <strong>70%</strong> with a Python pipeline that automated cement plant-to-city transport distance calculations using the OpenRouteService API.</li>
+              <li>Optimized routes to cut transportation carbon emissions by <strong>16%</strong>, implementing a minimum-cost flow algorithm to model cement distribution.</li>
+            </ul>
+          </div>
+          <a class="experience-visual" href="assets/cement_flow.png" target="_blank" rel="noopener" aria-label="View full-size image: Cement distribution dashboard showing shipment routes and flow volumes">
+            <img src="assets/cement_flow.png" width="2334" height="1552" alt="Cement distribution dashboard showing shipment routes and flow volumes" loading="lazy" decoding="async">
+          </a>
+        </article>
+
+        <article class="experience-entry experience-with-image">
+          <div class="experience-content">
+            <p class="project-index">05 / 05 <span>Experience</span></p>
+            <h3>Computer Vision Lab</h3>
+            <p class="experience-role">Research Intern</p>
+          <div class="experience-meta">
+            <p><time datetime="2025-05">May 2025</time> — <time datetime="2025-08">Aug. 2025</time></p>
+            <p>East Lansing, MI</p>
+          </div>
+            <ul>
+              <li>Built a PyTorch evaluation framework using MaskDINO to compare object-masked and full-image depth estimation metrics, revealing model bias toward foreground objects over global scene geometry.</li>
+              <li>Evaluated Metric3D and UniDepth across distance ranges on KITTI and DDAD benchmarks using NumPy and OpenCV, finding a <strong>15–20% accuracy drop beyond 30 meters</strong>.</li>
+            </ul>
+          </div>
+          <a class="experience-visual" href="assets/metric3d.png" target="_blank" rel="noopener" aria-label="View full-size image: Metric3D examples showing source images, depth estimates, and surface normals">
+            <img src="assets/metric3d.png" width="1842" height="778" alt="Metric3D examples showing source images, depth estimates, and surface normals" loading="lazy" decoding="async">
+          </a>
+        </article>
+      </section>
+      <section id="projects" class="projects" aria-labelledby="projects-title">
+      <article class="project-section project-with-image project-section-first">
+        <header class="section-heading">
+          <p class="project-index">Projects</p>
+          <h2 id="projects-title">Selected projects</h2>
+        </header>
+        <div class="project-content">
+          <p class="project-index">01 / 04 <span>Generative AI</span></p>
+          <h2>Instruction-Tuned Diffusion Model for Image Editing</h2>
+          <p class="project-description">Fine-tuned Stable Diffusion with LoRA for text-conditioned image edits, using classifier-free guidance on both text and source images to control edit strength and prompt adherence.</p>
+          <p class="project-description project-result">Trained on the Great Lakes HPC cluster for <strong>50+ hours</strong> on <strong>250k+ instruction–image pairs</strong>.</p>
+          <p class="project-stack">Python · PyTorch · Stable Diffusion</p>
+          <a class="project-link" href="https://github.com/xuz24/nl_image_editor" target="_blank" rel="noopener">View project on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="project-visual" href="assets/diffusion.png" target="_blank" rel="noopener" aria-label="View full-size image: Diffusion image editor showing a city photograph transformed into a Van Gogh-style painting">
+          <img src="assets/diffusion.png" width="2904" height="1522" alt="Diffusion image editor showing a city photograph transformed into a Van Gogh-style painting" loading="lazy" decoding="async">
+        </a>
+      </article>
+      <article class="project-section project-with-image">
+        <div class="project-content">
+          <p class="project-index">02 / 04 <span>Accessibility</span></p>
+          <h2>A small gesture.<br>A new way to connect.</h2>
+          <p class="project-description">VoiceLink turns facial and head movements into real-time web controls, creating a hands-free experience for people with motor impairments.</p>
+          <p class="project-stack">MediaPipe · React · Python</p>
+          <a class="project-link" href="https://devpost.com/software/voicelink-3o41in" target="_blank" rel="noopener">VoiceLink <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="project-visual" href="assets/voicelink.png" target="_blank" rel="noopener" aria-label="View full-size image: VoiceLink gesture-controlled communication interface">
+          <img src="assets/voicelink.png" width="3016" height="1718" alt="VoiceLink interface with a camera view, suggested responses, and a gesture-controlled keyboard" loading="lazy" decoding="async">
+        </a>
+      </article>
+      <article class="project-section project-with-image">
+        <div class="project-content">
+          <p class="project-index">03 / 04 <span>Machine learning</span></p>
+          <h2>The first 15 minutes<br>tell a story.</h2>
+          <p class="project-description">Analyzing early-game metrics from 10,000+ professional League of Legends matches to predict the outcome, with 74% classification accuracy.</p>
+          <p class="project-stack">Python · pandas · scikit-learn</p>
+          <a class="project-link" href="https://github.com/xuz24/league-of-legends-analysis" target="_blank" rel="noopener">League of Legends Analysis <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="project-visual" href="assets/league_analysis.png" target="_blank" rel="noopener" aria-label="View full-size image: League of Legends prediction model results and training and testing score comparison">
+          <img src="assets/league_analysis.png" width="1600" height="1578" alt="League of Legends prediction model results and training and testing score comparison" loading="lazy" decoding="async">
+        </a>
+      </article>
+      <article class="project-section project-with-image">
+        <div class="project-content">
+          <p class="project-index">04 / 04 <span>Data analysis</span></p>
+          <h2>Finding patterns<br>in the wild.</h2>
+          <p class="project-description">Exploring the balance between wolves and moose on Isle Royale through population data, regression modeling, and hypothesis testing.</p>
+          <p class="project-stack">pandas · NumPy · Matplotlib · seaborn</p>
+          <a class="project-link" href="https://github.com/xuz24/isle-royale-wolf-moose" target="_blank" rel="noopener">Isle Royale Population Analysis <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="project-visual" href="assets/isle_royale.png" target="_blank" rel="noopener" aria-label="View full-size image: Isle Royale exploratory analysis showing the distribution of moose ages at death">
+          <img src="assets/isle_royale.png" width="1186" height="1350" alt="Isle Royale exploratory analysis showing the distribution of moose ages at death" loading="lazy" decoding="async">
+        </a>
+      </article>
+      </section>
+    </section>
+    <section class="closing-section" aria-label="Other projects and contact">
+      <section class="other-projects" aria-labelledby="other-projects-title">
+        <h2 id="other-projects-title">Other projects</h2>
+        <div class="other-projects-grid">
+          <article class="other-project">
+            <p class="project-index">Robotics</p>
+            <h3><a href="https://github.com/1504/Crescendo2024" target="_blank" rel="noopener">Crescendo 2024 <span aria-hidden="true">↗</span></a></h3>
+            <p>Robot subsystems and autonomous routines for my high school’s FRC team.</p>
+            <p class="project-stack">Java · WPILib · FRC</p>
+          </article>
+          <article class="other-project">
+            <p class="project-index">Web development</p>
+            <h3><a href="https://github.com/xuz24/website" target="_blank" rel="noopener">My first website <span aria-hidden="true">↗</span></a></h3>
+            <p>My original home for projects, research, and photographs, built from scratch.</p>
+            <p class="project-stack">HTML · CSS · JavaScript</p>
+          </article>
+        </div>
+      </section>
+      <section id="contact" class="contact-card" aria-labelledby="contact-title">
+        <div>
+          <h2 id="contact-title">Contact me</h2>
+          <p>Have a project in mind, a research idea, or just want to say hello?</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:xuzijie@umich.edu">xuzijie@umich.edu <span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href="https://www.linkedin.com/in/zijie-xu/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href="https://github.com/xuz24" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer><a href="mailto:xuzijie@umich.edu">Say hello ↗</a><span>© <span data-year>2026</span> Zijie Xu</span><a href="#about">Back to top ↑</a></footer>
+</body>
+</html>
