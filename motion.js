@@ -2,11 +2,13 @@
 (() => {
   const canvas = document.querySelector('#sand');
   if (!canvas) return;
-  const section = document.querySelector('#about');
+  const section = document.querySelector('#home');
   const intro = document.querySelector('.intro-content');
   const experience = document.querySelector('#experience');
   const firstSection = document.querySelector('#about-me') || experience;
   const scrollContent = [...document.querySelectorAll('.bio-content, .bio-photo, .experience-content, .experience-visual, .project-content, .project-visual')];
+  const contentParents = [...new Set(scrollContent.map(item => item.parentElement))];
+  const contentStyles = new WeakMap();
   const context = canvas.getContext('2d');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const pointer = { x: 0, y: 0, previousX: 0, previousY: 0, active: false };
@@ -15,6 +17,7 @@
   let width = 0, height = 0, grains = [];
   let frame = 0, previousTime = 0, lastPaint = 0, elapsed = 0;
   let visible = true, scrollDirty = true, scrollProgress = 0;
+  let targetScrollProgress = 0;
   let meshNodes = [], meshEdges = [];
   let visualScrollY = scrollY, lastScrollTime = -Infinity, lastTick = 0;
   const scrollEnergy = .35;
@@ -217,6 +220,7 @@
       const latitude = Math.acos(1 - 2 * (i + .5) / count);
       const phase = Math.random() * Math.PI * 2;
       const grain = { latitude, longitude: i * goldenAngle,
+        longitudeCos: Math.cos(i * goldenAngle), longitudeSin: Math.sin(i * goldenAngle),
         arrivalDelay: phase / (Math.PI * 2) * .4,
         arrivalDuration: 2.3 + phase / (Math.PI * 2) * .4,
         phaseCos: Math.cos(phase), phaseSin: Math.sin(phase),
@@ -255,12 +259,16 @@
     const speedBlend = 1 - Math.exp(-dt * 9);
     const scatter = Math.sin(scrollProgress * Math.PI) * .3;
     const driftTime = elapsed;
+    const latitudeSin = Math.sin(driftTime * .3), latitudeCos = Math.cos(driftTime * .3);
+    const floatSin = Math.sin(driftTime * .18), floatCos = Math.cos(driftTime * .18);
+    const driftSin = Math.sin(driftTime * .14), driftCos = Math.cos(driftTime * .14);
     const tilt = -.3;
     const cosTilt = Math.cos(tilt), sinTilt = Math.sin(tilt);
     const experienceWeight = scrollProgress;
     const particleVisibility = 1 - scrollProgress * .8;
     const entering = elapsed < 3.2 && !reduced.matches;
-    const fixedEnergy = scrolling || (entering && !moving);
+    // Arrival and cursor movement must not change speed-based colors on load.
+    const fixedEnergy = scrolling || entering;
     const arcScale = Math.min(width, height) * .1;
     context.globalCompositeOperation = 'lighter';
     for (const grain of grains) {
@@ -270,19 +278,20 @@
       // Half the grains are hidden early in the entrance. Skip their geometry,
       // physics, color, and drawing work until they actually become visible.
       if (visibleGrain === 0) continue;
-      const latitude = grain.latitude + Math.sin(driftTime * .3 + grain.phase) * .015;
+      const latitude = grain.latitude + (latitudeSin * grain.phaseCos + latitudeCos * grain.phaseSin) * .015;
       // Keep the base rotation rate constant; using the animated latitude here
       // would amplify its oscillation as elapsed time grows.
       const longitude = grain.longitude + driftTime * grain.rotationRate
         + Math.sin(latitude * 5 + driftTime * .18) * .16;
       // Traveling waves circle the rotation axis; latitude only tapers them
       // smoothly at the poles, with no top-to-bottom phase movement.
-      const wave = 1 + Math.sin(latitude) * (
+      const sinLatitude = Math.sin(latitude);
+      const wave = 1 + sinLatitude * (
         .05 * Math.sin(longitude * 3 - driftTime * .85)
         + .025 * Math.sin(longitude * 5 - driftTime * .6)
       );
       const radius = grain.radius * wave;
-      const ring = Math.sin(latitude) * radius;
+      const ring = sinLatitude * radius;
       const worldX = Math.cos(longitude) * ring;
       const worldY = Math.cos(latitude) * radius;
       const worldZ = Math.sin(longitude) * ring;
@@ -301,8 +310,8 @@
         homeY = startY + (sphereY - startY) * gather + grain.phaseSin * arc;
       }
       if (scrollProgress > 0) {
-        const floatX = grain.floatX * width + Math.sin(elapsed * .18 + grain.phase) * 24;
-        const floatY = grain.floatY * height + Math.cos(elapsed * .14 + grain.longitude) * 20;
+        const floatX = grain.floatX * width + (floatSin * grain.phaseCos + floatCos * grain.phaseSin) * 24;
+        const floatY = grain.floatY * height + (driftCos * grain.longitudeCos - driftSin * grain.longitudeSin) * 20;
         homeX += (floatX - homeX) * scrollProgress + (homeX - width / 2) * scatter;
         homeY += (floatY - homeY) * scrollProgress + (homeY - height / 2) * scatter;
       }
@@ -339,6 +348,7 @@
       }
       grain.lastX = screenX;
       grain.lastY = screenY;
+      if (screenX < -32 || screenX > width + 32 || screenY < -32 || screenY > height + 32) continue;
       const energy = fixedEnergy ? scrollEnergy : clamp(grain.speed / 130, 0, 1);
       const variant = grain.variant;
       context.fillStyle = palettes[variant][Math.round(energy * 47)];
@@ -383,17 +393,21 @@
     // copy in the same experience share a single layout read.
     const rects = new Map();
     const scrollOffset = scrollY - visualScrollY;
-    for (const item of scrollContent) {
-      const parent = item.parentElement;
-      if (!rects.has(parent)) {
-        const rect = parent.getBoundingClientRect();
-        rects.set(parent, { top: rect.top + scrollOffset, height: rect.height });
-      }
+    for (const parent of contentParents) {
+      const rect = parent.getBoundingClientRect();
+      rects.set(parent, { top: rect.top + scrollOffset, height: rect.height });
     }
     // Disperse while Experience enters, so the sphere is already gone when
     // the research entries become the focus of the viewport.
     const experienceTop = (firstSection || section).getBoundingClientRect()[firstSection ? 'top' : 'bottom'] + scrollOffset;
-    scrollProgress = ease(clamp((height * .95 - experienceTop) / (height * .95), 0, 1));
+    // Hold the sphere through the first third of the scroll, then disperse
+    // the grains and mesh together as About Me reaches the viewport.
+    targetScrollProgress = ease(clamp((height * .65 - experienceTop) / (height * .65), 0, 1));
+    // Dispersal follows the existing scroll timing. Reassembly catches up
+    // gradually, even after the browser has finished scrolling to Home.
+    if (reduced.matches || targetScrollProgress >= scrollProgress) {
+      scrollProgress = targetScrollProgress;
+    }
     if (reduced.matches) { drawSand(0); return; }
     const viewport = innerHeight;
     const progress = clamp(visualScrollY / height, 0, 1);
@@ -402,8 +416,12 @@
     for (const item of scrollContent) {
       const rect = rects.get(item.parentElement);
       const distance = (rect.top + rect.height / 2 - viewport / 2) / viewport;
-      item.style.transform = `translate3d(0, ${clamp(distance * 70, -65, 65)}px, 0)`;
-      item.style.opacity = clamp((viewport - rect.top) / (viewport * .48), 0, 1);
+      const transform = `translate3d(0, ${clamp(distance * 70, -65, 65).toFixed(2)}px, 0)`;
+      const opacity = clamp((viewport - rect.top) / (viewport * .48), 0, 1).toFixed(3);
+      const previous = contentStyles.get(item);
+      if (previous?.transform !== transform) item.style.transform = transform;
+      if (previous?.opacity !== opacity) item.style.opacity = opacity;
+      contentStyles.set(item, { transform, opacity });
     }
   }
 
@@ -422,15 +440,19 @@
       const introTransition = Math.min(scrollY, visualScrollY) < height;
       visualScrollY += distance * (1 - Math.exp(-frameDt * (introTransition ? 6 : 14)));
     }
-    const scrolling = settling || now - lastScrollTime < 180;
     if (scrollDirty || settling) scrollMotion();
+    const reassembling = scrollProgress - targetScrollProgress > .0005;
+    const scrolling = settling || reassembling || now - lastScrollTime < 180;
     if (reduced.matches || !visible) { previousTime = 0; return; }
     // Follow the browser's snap animation at up to 60 fps; idle rendering
     // keeps its lower cadence. Color energy stays fixed through settling.
-    if (now - lastPaint >= (scrolling ? 15 : 30)) {
+    if (now - lastPaint >= (scrolling ? 15 : scrollProgress === 1 ? 50 : 30)) {
       const dt = previousTime ? Math.min((now - previousTime) / 1000, .05) : 1 / 30;
       previousTime = lastPaint = now;
       elapsed += dt;
+      if (reassembling) {
+        scrollProgress += (targetScrollProgress - scrollProgress) * (1 - Math.exp(-dt * 2.8));
+      } else scrollProgress = targetScrollProgress;
       drawSand(dt, scrolling);
     }
     requestTick();
@@ -473,7 +495,9 @@
     if (reduced.matches) {
       elapsed = Math.max(elapsed, 3.2);
       drawSand(0);
-      [intro, ...scrollContent].forEach(item => { item.style.transform = ''; item.style.opacity = ''; });
+      [intro, ...scrollContent].forEach(item => {
+        item.style.transform = ''; item.style.opacity = ''; contentStyles.delete(item);
+      });
     }
     scrollDirty = true;
     requestTick();

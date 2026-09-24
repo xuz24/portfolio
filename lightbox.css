@@ -1,0 +1,14 @@
+.lightbox { border: 0; padding: 55px 60px 25px; background: #0c172a; color: white; width: min(1200px, 96vw); max-width: 96vw; max-height: 94vh; border-radius: 8px; }
+.lightbox::backdrop { background: #050a14ed; }
+.lightbox img { max-height: 72vh; width: 100%; object-fit: contain; }
+.lightbox-close { position: absolute; right: 17px; top: 10px; background: none; color: white; border: 0; font-size: 26px; cursor: pointer; }
+.lightbox-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 17px; gap: 15px; }
+.lightbox-bar p { font-size: 12px; margin: 0; text-align: center; }
+.lightbox-bar button { background: none; color: white; border: 1px solid #45658e; border-radius: 50%; width: 42px; height: 42px; cursor: pointer; flex-shrink: 0; }
+.lightbox-bar button:hover { background: #19345c; }
+body:has(dialog[open]) { overflow: hidden; }
+@media (max-width: 700px) {
+  .lightbox { padding: 50px 12px 20px; }
+  .lightbox-bar p { font-size: 10px; }
+}
+.lightbox button:focus-visible { outline: 2px solid #91bbff; outline-offset: 4px; }

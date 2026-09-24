@@ -5,6 +5,10 @@
   const cities = [...document.querySelectorAll('[data-city]')];
   const controls = [...document.querySelectorAll('[data-map-view]')];
   const layer = document.querySelector('#map-markers');
+  const cityName = document.querySelector('#map-city-name');
+  const countryName = document.querySelector('#map-city-country');
+  const collectionLink = document.querySelector('#map-collection');
+  const markerCircles = [];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const views = {
     world: [0, 0, 1000, 500],
@@ -22,11 +26,14 @@
     marker.setAttribute('aria-label', `${button.dataset.city}, ${button.dataset.country}`);
     marker.setAttribute('aria-pressed', 'false');
     marker.classList.add('map-marker');
+    const circles = [];
     for (const type of ['hit', 'halo', 'dot']) {
       const circle = document.createElementNS(ns, 'circle');
       circle.classList.add(`marker-${type}`);
       marker.append(circle);
+      circles.push(circle);
     }
+    markerCircles.push(circles);
     const title = document.createElementNS(ns, 'title');
     title.textContent = `${button.dataset.city}, ${button.dataset.country}`;
     marker.append(title);
@@ -45,16 +52,17 @@
 
   function paintView() {
     map.setAttribute('viewBox', view.join(' '));
-    markers.forEach(marker => {
-      marker.querySelector('.marker-hit').setAttribute('r', view[2] * .014);
-      marker.querySelector('.marker-halo').setAttribute('r', view[2] * .007);
-      marker.querySelector('.marker-dot').setAttribute('r', view[2] * .003);
+    markerCircles.forEach(([hit, halo, dot]) => {
+      hit.setAttribute('r', view[2] * .014);
+      halo.setAttribute('r', view[2] * .007);
+      dot.setAttribute('r', view[2] * .003);
     });
   }
   function setView(name) {
     cancelAnimationFrame(animation);
     controls.forEach(button => button.setAttribute('aria-pressed', button.dataset.mapView === name));
     targetView = views[name];
+    if (view.every((value, i) => value === targetView[i])) return;
     if (reduced.matches) { view = [...targetView]; paintView(); return; }
     const from = [...view], start = performance.now();
     function animate(now) {
@@ -72,9 +80,9 @@
       city.setAttribute('aria-pressed', selected);
       markers[i].setAttribute('aria-pressed', selected);
     });
-    document.querySelector('#map-city-name').textContent = button.dataset.city;
-    document.querySelector('#map-city-country').textContent = button.dataset.country;
-    const link = document.querySelector('#map-collection');
+    cityName.textContent = button.dataset.city;
+    countryName.textContent = button.dataset.country;
+    const link = collectionLink;
     link.hidden = !button.dataset.collection;
     if (button.dataset.collection) {
       link.href = `#${button.dataset.collection}`;

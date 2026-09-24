@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600&display=swap');
 :root { color-scheme: dark; --paper: #080e1b; --ink: #e6efff; --muted: #a0b3d0; --line: #293c59; --blue: #91bbff; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 32px; }
@@ -62,15 +61,6 @@ h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.2; letter-spacing: -1.3px
 .footer { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-block: 25px; font-size: 10px; color: var(--muted); }
 .skip-link { position: fixed; top: -100px; left: 16px; background: var(--ink); color: var(--paper); padding: 10px; z-index: 10; }
 .skip-link:focus { top: 10px; }
-.lightbox { border: 0; padding: 55px 60px 25px; background: #0c172a; color: white; width: min(1200px, 96vw); max-width: 96vw; max-height: 94vh; border-radius: 8px; }
-.lightbox::backdrop { background: #050a14ed; }
-.lightbox img { max-height: 72vh; width: 100%; object-fit: contain; }
-.lightbox-close { position: absolute; right: 17px; top: 10px; background: none; color: white; border: 0; font-size: 26px; cursor: pointer; }
-.lightbox-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 17px; gap: 15px; }
-.lightbox-bar p { font-size: 12px; margin: 0; text-align: center; }
-.lightbox-bar button { background: none; color: white; border: 1px solid #45658e; border-radius: 50%; width: 42px; height: 42px; cursor: pointer; flex-shrink: 0; }
-.lightbox-bar button:hover { background: #19345c; }
-body:has(dialog[open]) { overflow: hidden; }
 @media (max-width: 700px) {
   .wrap { width: calc(100% - 40px); }
   .site-header { min-height: 85px; gap: 16px; }
@@ -90,8 +80,6 @@ body:has(dialog[open]) { overflow: hidden; }
   .photo-button { margin-bottom: 12px; }
   .contact { padding-block: 40px; margin-top: 50px; }
   .footer > span:nth-child(2) { display: none; }
-  .lightbox { padding: 50px 12px 20px; }
-  .lightbox-bar p { font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
