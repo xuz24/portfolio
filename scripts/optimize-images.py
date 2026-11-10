@@ -33,7 +33,7 @@ def convert(src):
     metadata = subprocess.check_output(['sips', '-g', 'pixelWidth', '-g', 'pixelHeight', str(source)], text=True)
     width = int(re.search(r'pixelWidth: (\d+)', metadata)[1])
     height = int(re.search(r'pixelHeight: (\d+)', metadata)[1])
-    widths = sorted({min(width, size) for size in ([220, 440] if src.endswith('profile.jpg') else [480, 960])})
+    widths = sorted({min(width, size) for size in ([220, 440] if src.endswith('profile.webp') else [480, 960])})
     previews = []
     for size in widths:
         target = OUT / f'{source.stem}-{size}.webp'
@@ -51,7 +51,7 @@ for name, text in pages.items():
         if src not in images:
             return tag
         width, height, previews = images[src]
-        sizes = ('(min-width: 1000px) 280px, 220px' if src.endswith('profile.jpg') else
+        sizes = ('(min-width: 1000px) 280px, 220px' if src.endswith('profile.webp') else
                  '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1256px) calc((100vw - 136px) / 3), 374px' if name == 'gallery.html' else
                  '(max-width: 999px) min(560px, calc(100vw - 56px)), (max-width: 1199px) 45vw, 480px')
         for key, value in {'src': previews[0][0], 'srcset': ', '.join(f'{path} {size}w' for path, size in previews), 'sizes': sizes, 'width': str(width), 'height': str(height), 'data-full-src': src}.items():
